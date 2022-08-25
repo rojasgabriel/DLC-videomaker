@@ -48,7 +48,7 @@ data_path = r'C:\Users\Anne\data\JC066\20211006_151200\dlc_analysis\JC066_202110
 mov = VideoStack([video_path], outputdict={'-pix_fmt':'gray'})
 dlc_coords = pd.read_hdf(data_path)
 bpts = dlc_coords.columns.get_level_values("bodyparts")
-all_bpts = bpts.values[::3]
+all_bpts = bpts.values[::3] # just for reference. not used for anything
 dlc_coords_x, dlc_coords_y, dlc_coords_likelihood = dlc_coords.values.reshape((len(dlc_coords), -1, 3)).T
 bplist = bpts.unique().to_list()
 nbodyparts = len(bplist)
@@ -60,9 +60,9 @@ y = []
 for label in range(nbodyparts):
     x.append(dlc_coords_x[label, int(val)])
     y.append(dlc_coords_y[label, int(val)])
-    
+
 frame = mov[int(np.mod(val,len(mov)-1))].squeeze()
-  
+
 # make vispy widget
 fig = vp.Fig(size=(800, 600), show=False,vsync=True)
 plot = fig[0, 0]
