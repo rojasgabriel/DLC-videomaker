@@ -43,8 +43,8 @@ class DLCvideomaker(QWidget):
         return groupBox
 
 # load video and data
-video_path = r'C:\Users\Anne\data\JC072\20220307_110327\DropletsTask\JC072_20220307_110327_cam0_00000000.avi'
-data_path = r'C:\Users\Anne\data\JC072\20220307_110327\dlc_analysis\JC072_20220307_110327_cam0_00000000DLC_resnet50_JC072Apr1shuffle1_200000.h5'
+video_path = r'C:\Users\Anne\data\JC066\20211006_151200\DropletsTask\JC066_20211006_151200_cam1_00000002.avi'
+data_path = r'C:\Users\Anne\data\JC066\20211006_151200\dlc_analysis\JC066_20211006_151200_cam1_00000002DLC_resnet50_JC066Jun27shuffle1_300000.h5'
 mov = VideoStack([video_path], outputdict={'-pix_fmt':'gray'})
 dlc_coords = pd.read_hdf(data_path)
 bpts = dlc_coords.columns.get_level_values("bodyparts")
@@ -80,7 +80,7 @@ def set_data(val):
     im.set_data(frame)
 
 # plot and show data on vispy widget
-pl = plot.plot(data=np.vstack([x,y]).T,symbol='star',marker_size=5,width = 0,face_color='y',edge_color='y')
+pl = plot.plot(data=np.vstack([x,y]).T,symbol='o',marker_size=3,width = 0,face_color='k',edge_color='k')
 im = plot.image(frame, cmap="gray")
 plot.camera.set_range((mov.shape[2],0), (mov.shape[3],0)) # flip upside down video
 fig.show(run=True)
